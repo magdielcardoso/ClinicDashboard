@@ -1,9 +1,8 @@
 <%= form_with(model: client, class: "contents") do |form| %>
   <% if client.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-      <ul class="list-disc ml-6">
+    <div id="error_explanation" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-6">
+      <h2 class="font-medium mb-2"><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <ul class="list-disc ml-6 space-y-1">
         <% client.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,27 +10,51 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": client.errors[:first_name].none?, "border-red-400 focus:outline-red-600": client.errors[:first_name].any?}] %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="space-y-2">
+      <%= form.label :first_name, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :first_name, 
+          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 #{client.errors[:first_name].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : ''}" %>
+      <% if client.errors[:first_name].any? %>
+        <p class="text-sm text-red-600"><%= client.errors[:first_name].first %></p>
+      <% end %>
+    </div>
+
+    <div class="space-y-2">
+      <%= form.label :last_name, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :last_name, 
+          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 #{client.errors[:last_name].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : ''}" %>
+      <% if client.errors[:last_name].any? %>
+        <p class="text-sm text-red-600"><%= client.errors[:last_name].first %></p>
+      <% end %>
+    </div>
   </div>
 
-  <div class="my-5">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": client.errors[:last_name].none?, "border-red-400 focus:outline-red-600": client.errors[:last_name].any?}] %>
+  <div class="mt-6 space-y-2">
+    <%= form.label :email, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.email_field :email, 
+        class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 #{client.errors[:email].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : ''}" %>
+    <% if client.errors[:email].any? %>
+      <p class="text-sm text-red-600"><%= client.errors[:email].first %></p>
+    <% end %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :email %>
-    <%= form.text_field :email, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": client.errors[:email].none?, "border-red-400 focus:outline-red-600": client.errors[:email].any?}] %>
+  <div class="mt-6 space-y-2">
+    <%= form.label :phone, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.telephone_field :phone, 
+        class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 #{client.errors[:phone].any? ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : ''}" %>
+    <% if client.errors[:phone].any? %>
+      <p class="text-sm text-red-600"><%= client.errors[:phone].first %></p>
+    <% end %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :phone %>
-    <%= form.text_field :phone, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": client.errors[:phone].none?, "border-red-400 focus:outline-red-600": client.errors[:phone].any?}] %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div class="mt-8 flex justify-end space-x-3">
+    <% if client.persisted? %>
+      <%= link_to "Cancel", @client, class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= form.submit "Update Client", class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    <% else %>
+      <%= link_to "Cancel", clients_path, class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= form.submit "Create Client", class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    <% end %>
   </div>
 <% end %>

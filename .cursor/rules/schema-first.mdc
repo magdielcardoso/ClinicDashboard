@@ -1,0 +1,140 @@
+---
+alwaysApply: true
+---
+
+# Schema-First Development Rule
+
+**ALWAYS consult the database schema first** before working with any models or creating views that reference model attributes.
+
+## Why This Rule Exists
+
+The schema file `[db/schema.rb](mdc:db/schema.rb)` contains the definitive source of truth for:
+- All database tables and their structure
+- Field names, types, and constraints
+- Relationships between models
+- Indexes and foreign keys
+
+## What Happens When You Don't Follow This Rule
+
+**Example Error**: The dashboard view was trying to access `appointment.appointment_date` but the actual field in the schema is `scheduled_at`.
+
+**Result**: Runtime errors, missing data, and broken functionality.
+
+## Before You Start Coding
+
+1. **ALWAYS** open and review `[db/schema.rb](mdc:db/schema.rb)` first
+2. **Verify field names** match exactly what you're trying to access
+3. **Check data types** to ensure proper formatting
+4. **Understand relationships** between models
+
+## Current Schema Structure
+
+Based on the current schema, here are the key models and their fields:
+
+### Appointments
+- `client_id` (integer, foreign key)
+- `procedure_id` (integer, foreign key) 
+- `user_id` (integer, foreign key)
+- `scheduled_at` (datetime) ← **NOT appointment_date**
+- `status` (string)
+- `notes` (text)
+
+### Clients
+- `first_name` (string)
+- `last_name` (string)
+- `email` (string, unique)
+- `phone` (string)
+
+### Procedures
+- `name` (string)
+- `description` (text)
+- `price` (decimal)
+
+### Users
+- `email` (string, unique)
+- `name` (string)
+- `role` (string)
+
+## How to Fix the Current Issue
+
+In the dashboard view, change:
+```erb
+<%= appointment.appointment_date&.strftime('%d/%m/%Y %H:%M') %>
+```
+
+To:
+```erb
+<%= appointment.scheduled_at&.strftime('%d/%m/%Y %H:%M') %>
+```
+
+## Remember
+
+**Schema First, Code Second** - Always check the database structure before writing any code that references model attributes.
+# Schema-First Development Rule
+
+**ALWAYS consult the database schema first** before working with any models or creating views that reference model attributes.
+
+## Why This Rule Exists
+
+The schema file `[db/schema.rb](mdc:db/schema.rb)` contains the definitive source of truth for:
+- All database tables and their structure
+- Field names, types, and constraints
+- Relationships between models
+- Indexes and foreign keys
+
+## What Happens When You Don't Follow This Rule
+
+**Example Error**: The dashboard view was trying to access `appointment.appointment_date` but the actual field in the schema is `scheduled_at`.
+
+**Result**: Runtime errors, missing data, and broken functionality.
+
+## Before You Start Coding
+
+1. **ALWAYS** open and review `[db/schema.rb](mdc:db/schema.rb)` first
+2. **Verify field names** match exactly what you're trying to access
+3. **Check data types** to ensure proper formatting
+4. **Understand relationships** between models
+
+## Current Schema Structure
+
+Based on the current schema, here are the key models and their fields:
+
+### Appointments
+- `client_id` (integer, foreign key)
+- `procedure_id` (integer, foreign key) 
+- `user_id` (integer, foreign key)
+- `scheduled_at` (datetime) ← **NOT appointment_date**
+- `status` (string)
+- `notes` (text)
+
+### Clients
+- `first_name` (string)
+- `last_name` (string)
+- `email` (string, unique)
+- `phone` (string)
+
+### Procedures
+- `name` (string)
+- `description` (text)
+- `price` (decimal)
+
+### Users
+- `email` (string, unique)
+- `name` (string)
+- `role` (string)
+
+## How to Fix the Current Issue
+
+In the dashboard view, change:
+```erb
+<%= appointment.appointment_date&.strftime('%d/%m/%Y %H:%M') %>
+```
+
+To:
+```erb
+<%= appointment.scheduled_at&.strftime('%d/%m/%Y %H:%M') %>
+```
+
+## Remember
+
+**Schema First, Code Second** - Always check the database structure before writing any code that references model attributes.

@@ -1,13 +1,7 @@
-<div class="min-h-screen bg-gray-50">
-  <!-- Header -->
-  <div class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-    <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
-    <p class="text-gray-600 mt-1">Visão geral da clínica</p>
-  </div>
-
+<div class="min-h-screen">
   <!-- Stats Cards -->
-  <div class="px-6 py-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  <div class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
       <!-- Total Clients -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <div class="flex items-center">
@@ -71,27 +65,27 @@
           </div>
           <div class="ml-4">
             <p class="text-sm font-medium text-gray-600">Consultas Hoje</p>
-            <p class="text-2xl font-semibold text-gray-900"><%= Appointment.where('DATE(appointment_date) = ?', Date.current).count %></p>
+            <p class="text-2xl font-semibold text-gray-900"><%= Appointment.where('DATE(scheduled_at) = ?', Date.current).count %></p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Recent Activity -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-4">
       <!-- Recent Appointments -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200">
         <div class="px-6 py-4 border-b border-gray-200">
           <h3 class="text-lg font-medium text-gray-900">Consultas Recentes</h3>
         </div>
         <div class="p-6">
-          <% if Appointment.order(appointment_date: :desc).limit(5).any? %>
+          <% if Appointment.order(scheduled_at: :desc).limit(5).any? %>
             <div class="space-y-4">
-              <% Appointment.order(appointment_date: :desc).limit(5).each do |appointment| %>
+              <% Appointment.order(scheduled_at: :desc).limit(5).each do |appointment| %>
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="text-sm font-medium text-gray-900"><%= appointment.client&.name || 'Cliente não encontrado' %></p>
-                    <p class="text-sm text-gray-500"><%= appointment.appointment_date&.strftime('%d/%m/%Y %H:%M') %></p>
+                    <p class="text-sm text-gray-500"><%= appointment.scheduled_at&.strftime('%d/%m/%Y %H:%M') %></p>
                   </div>
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                     <%= appointment.procedure&.name || 'Procedimento não definido' %>
