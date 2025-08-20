@@ -3,9 +3,76 @@
       <nav class="border-b lg:border-gray-200 dark:border-gray-700 dark:bg-gray-900 border-transparent py-3.5 px-6  w-full  fixed ">
       <div class="flex items-center justify-between gap-1 sm:gap-6 lg:flex-row flex-col">
          <div class="flex justify-between items-center lg:w-auto w-full">
-           <a href="#" class="block">
-              <img src="https://pagedone.io/asset/uploads/1701235273.png" alt="Pagedone logo image" class="block dark:hidden">
-              <img src="https://pagedone.io/asset/uploads/1712310504.png" alt="Pagedone logo image" class="hidden dark:block">
+           <a href="#" class="flex items-center gap-3">
+              <svg class="w-10 h-10 text-white" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="logoGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                    <stop offset="25%" style="stop-color:#ffffff;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#ffffff;stop-opacity:1" />
+                    <stop offset="75%" style="stop-color:#ffffff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+                  </linearGradient>
+                  
+                  <radialGradient id="heartHighlight" cx="50%" cy="40%" r="50%">
+                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+                    <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.3" />
+                  </radialGradient>
+                  
+                  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#ffffff" flood-opacity="0.3"/>
+                  </filter>
+                </defs>
+                
+                <!-- Scanner frame corners - refined with better proportions -->
+                <g>
+                  <!-- Top-left corner -->
+                  <path d="M 25 25 L 48 25 L 48 38 L 38 38 L 38 48 L 25 48 Z" fill="url(#logoGradient)" filter="url(#shadow)"/>
+                  
+                  <!-- Top-right corner -->
+                  <path d="M 95 25 L 72 25 L 72 38 L 82 38 L 82 48 L 95 48 Z" fill="url(#logoGradient)" filter="url(#shadow)"/>
+                  
+                  <!-- Bottom-left corner -->
+                  <path d="M 25 95 L 48 95 L 48 82 L 38 82 L 38 72 L 25 72 Z" fill="url(#logoGradient)" filter="url(#shadow)"/>
+                  
+                  <!-- Bottom-right corner -->
+                  <path d="M 95 95 L 72 95 L 72 82 L 82 82 L 82 72 L 95 72 Z" fill="url(#logoGradient)" filter="url(#shadow)"/>
+                </g>
+                
+                <!-- Central heart symbol - perfectly centered -->
+                <g>
+                  <!-- Main heart shape with better curves and perfect centering -->
+                  <path d="M 60 52 Q 60 40 72 40 Q 82 40 82 50 Q 82 60 60 80 Q 38 60 38 50 Q 38 40 48 40 Q 60 40 60 52 Z" fill="url(#logoGradient)" filter="url(#shadow)"/>
+                  
+                  <!-- Inner heart highlight with radial gradient -->
+                  <path d="M 60 52 Q 60 44 70 44 Q 78 44 78 50 Q 78 58 60 74 Q 42 58 42 50 Q 42 44 50 44 Q 60 44 60 52 Z" fill="url(#heartHighlight)"/>
+                  
+                  <!-- Subtle inner shadow for depth -->
+                  <path d="M 60 52 Q 60 44 70 44 Q 78 44 78 50 Q 78 58 60 74 Q 42 58 42 50 Q 42 44 50 44 Q 60 44 60 52 Z" fill="url(#logoGradient)" opacity="0.3"/>
+                </g>
+                
+                <!-- Refined scanning effect lines -->
+                <g>
+                  <!-- Top scanning line with gradient -->
+                  <path d="M 32 32 L 88 32" stroke="url(#logoGradient)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.8"/>
+                  
+                  <!-- Bottom scanning line with gradient -->
+                  <path d="M 32 88 L 88 88" stroke="url(#logoGradient)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.8"/>
+                  
+                  <!-- Vertical scanning indicators -->
+                  <path d="M 32 32 L 32 88" stroke="url(#logoGradient)" stroke-width="1" fill="none" stroke-dasharray="3,4" opacity="0.6"/>
+                  <path d="M 88 32 L 88 88" stroke="url(#logoGradient)" stroke-width="1" fill="none" stroke-dasharray="3,4" opacity="0.6"/>
+                </g>
+                
+                <!-- Subtle corner connectors for unity -->
+                <g opacity="0.4">
+                  <path d="M 48 25 L 48 38" stroke="url(#logoGradient)" stroke-width="1" fill="none"/>
+                  <path d="M 72 25 L 72 38" stroke="url(#logoGradient)" stroke-width="1" fill="none"/>
+                  <path d="M 48 82 L 48 95" stroke="url(#logoGradient)" stroke-width="1" fill="none"/>
+                  <path d="M 72 82 L 72 95" stroke="url(#logoGradient)" stroke-width="1" fill="none"/>
+                </g>
+              </svg>
+              <span class="text-xl font-bold text-white">DataClinic</span>
           </a>
           <button id="navbar-toggle" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none " aria-controls="navbar-default" aria-expanded="false">
               <span class="sr-only">Open main menu</span>
@@ -52,11 +119,11 @@
       <div class="py-4 lg:px-8 px-3 bg-gray-50 dark:bg-gray-900 ">
           <div class="block max-lg:pl-6">
               <h6 class="text-sm sm:text-lg font-semibold text-gray-900 dark:text-white whitespace-nowrap mb-1.5">
-                Welcome back,
+                Bem-vindo de volta,
                 <span class="text-indigo-600 text-base sm:text-lg font-semibold">
                   <%= current_user&.name || "Usuário" %>!</span>
               </h6>
-              <p class="text-xs font-medium text-gray-900 dark:text-white">Home</p>
+              <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Estamos aqui para ajudar você a gerenciar sua clínica com eficiência</p>
             </div>
       </div>
       <div class="flex-1 w-full p-8 bg-white rounded-2xl ">
