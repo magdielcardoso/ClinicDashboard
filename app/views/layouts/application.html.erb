@@ -10,7 +10,6 @@
 
     <%= yield :head %>
 
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -21,9 +20,10 @@
   </head>
 
   <body>
-    <%= render 'components/sidebar' %>
-    <main class="ml-20 p-4">
-      <%= yield %>
-    </main>
+    <%= render 'components/app_shell' do %>
+      <div class="w-full p-8 bg-white rounded-3xl">
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>
